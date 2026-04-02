@@ -1,6 +1,7 @@
 package br.edu.utfpr.calculaimc
 
 import android.icu.text.DecimalFormat
+import android.icu.text.NumberFormat
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -10,6 +11,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.util.Locale
+import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btCalcular.setOnLongClickListener {
-            Toast.makeText(this, "Faz o calculo do IMC", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toast_calcular), Toast.LENGTH_SHORT).show()
             true
         }
     }
@@ -54,25 +57,34 @@ class MainActivity : AppCompatActivity() {
         etAltura.setText("")
         tvResultado.setText("0.0")
         etPeso.requestFocus()
-        Toast.makeText(this, "Campos Limpos", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.toast_limpar), Toast.LENGTH_SHORT).show()
+        //log.i("MainActivity", "Exemplo de information")
+        //log.e("MainActivity", "Exemplo de information")
     }
 
     private fun calcularIMC() {
         if (etPeso.text.isEmpty()){
-            etPeso.error = "Campo Obrigatório"
+            etPeso.error = getString(R.string.toast_campoObrigatorio)
             return
         }
         if (etAltura.text.isEmpty()){
-            etAltura.error = "Campo Obrigatório"
+            etAltura.error = getString(R.string.toast_campoObrigatorio)
             return
         }
 
         val peso = etPeso.text.toString().toDouble()
         val altura = etAltura.text.toString().toDouble()
 
-        val imc = peso / Math.pow(altura, 2.0)
+        var imc : Double
 
-        var formatador = DecimalFormat("0.00")
-        tvResultado.text = formatador.format(imc)
+        if(Locale.getDefault().language.equals("en")){
+            imc = 703 * ( peso / altura.pow(2.0))
+        }else{
+            imc = peso / altura.pow(2.0)
+        }
+
+        val nf = NumberFormat.getNumberInstance(Locale.getDefault())
+        val df = nf as DecimalFormat
+        tvResultado.text = df.format(imc)
     }
 }

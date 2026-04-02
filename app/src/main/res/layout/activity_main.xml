@@ -1,78 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tvPeso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Peso:" />
+        android:text="@string/peso"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <EditText
         android:id="@+id/etPeso"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Peso em Kg"
+        android:hint="@string/hint_peso"
         android:importantForAutofill="no"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        app:layout_constraintStart_toEndOf="@id/tvPeso"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <TextView
+        android:id="@+id/tvAltura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Altura:" />
+        android:text="@string/altura"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="@id/tvPeso"
+        app:layout_constraintTop_toBottomOf="@id/etPeso"
+        />
 
     <EditText
         android:id="@+id/etAltura"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Altura em metros"
+        android:hint="@string/hint_altura"
         android:importantForAutofill="no"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        app:layout_constraintStart_toEndOf="@id/tvAltura"
+        app:layout_constraintTop_toBottomOf="@id/etPeso"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tvImc"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="IMC: " />
+        android:text="@string/imc"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="@id/tvAltura"
+        app:layout_constraintTop_toBottomOf="@id/tvAltura"
+        />
 
     <TextView
         android:id="@+id/tvResultado"
         android:layout_width="139dp"
         android:layout_height="wrap_content"
-        android:text="0.0"
+        android:text="@string/zeros"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#E91E63"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:padding="16dp"
+        app:layout_constraintStart_toEndOf="@id/tvImc"
+        app:layout_constraintTop_toBottomOf="@id/tvAltura"
+        />
 
-    <LinearLayout
-        style="?android:attr/buttonBarStyle"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btCalcular"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal">
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:text="@string/calcular"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="@id/tvResultado"
+        app:layout_constraintTop_toBottomOf="@id/tvResultado"
+        />
 
-        <Button
-            android:id="@+id/btCalcular"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="Calcular" />
+    <Button
+        android:id="@+id/btLimpar"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/limpar"
+        android:padding="16dp"
+        app:layout_constraintStart_toEndOf="@id/btCalcular"
+        app:layout_constraintTop_toBottomOf="@id/tvResultado"
+        />
 
-        <Button
-            android:id="@+id/btLimpar"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Limpar" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
